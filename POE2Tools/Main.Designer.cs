@@ -394,6 +394,7 @@
             txtFlaskCooldown1.TabIndex = 6;
             txtFlaskCooldown1.Text = "200";
             txtFlaskCooldown1.WordWrap = false;
+            txtFlaskCooldown1.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkFlaskCooldown1
             // 
@@ -509,6 +510,7 @@
             txtFlaskCooldown2.TabIndex = 6;
             txtFlaskCooldown2.Text = "4000";
             txtFlaskCooldown2.WordWrap = false;
+            txtFlaskCooldown2.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkFlaskCooldown2
             // 
@@ -624,6 +626,7 @@
             txtSkillCooldown1.TabIndex = 6;
             txtSkillCooldown1.Text = "4000";
             txtSkillCooldown1.WordWrap = false;
+            txtSkillCooldown1.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkSkillCooldown1
             // 
@@ -739,6 +742,7 @@
             txtSkillCooldown2.TabIndex = 6;
             txtSkillCooldown2.Text = "4000";
             txtSkillCooldown2.WordWrap = false;
+            txtSkillCooldown2.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkSkillCooldown2
             // 
@@ -854,6 +858,7 @@
             txtSkillCooldown3.TabIndex = 6;
             txtSkillCooldown3.Text = "4000";
             txtSkillCooldown3.WordWrap = false;
+            txtSkillCooldown3.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkSkillCooldown3
             // 
@@ -969,6 +974,7 @@
             txtSkillCooldown4.TabIndex = 6;
             txtSkillCooldown4.Text = "4000";
             txtSkillCooldown4.WordWrap = false;
+            txtSkillCooldown4.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkSkillCooldown4
             // 
@@ -1084,6 +1090,7 @@
             txtSkillCooldown5.TabIndex = 6;
             txtSkillCooldown5.Text = "4000";
             txtSkillCooldown5.WordWrap = false;
+            txtSkillCooldown5.TextChanged += txtSkillCooldown_TextChanged;
             // 
             // chkSkillCooldown5
             // 
