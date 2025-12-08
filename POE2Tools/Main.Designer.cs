@@ -113,6 +113,9 @@
             chkSkillCooldown5 = new System.Windows.Forms.CheckBox();
             chkSkillLowLife5 = new System.Windows.Forms.CheckBox();
             grpDebug = new System.Windows.Forms.GroupBox();
+            chkMouse5Status = new System.Windows.Forms.CheckBox();
+            chkShiftHold = new System.Windows.Forms.CheckBox();
+            chkSpaceStatus = new System.Windows.Forms.CheckBox();
             lblColorTolerance = new System.Windows.Forms.Label();
             trkColorTolerance = new System.Windows.Forms.TrackBar();
             lblColorToleranceTitle = new System.Windows.Forms.Label();
@@ -137,6 +140,8 @@
             chkLowLifeDebug = new System.Windows.Forms.CheckBox();
             chkHighLifeDebug = new System.Windows.Forms.CheckBox();
             lblHideout1 = new System.Windows.Forms.Label();
+            chkSmartSprint = new System.Windows.Forms.CheckBox();
+            grpOther = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)trkUpdateRate).BeginInit();
             grpFlask1.SuspendLayout();
             grpFlask2.SuspendLayout();
@@ -147,6 +152,7 @@
             grpSkill5.SuspendLayout();
             grpDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trkColorTolerance).BeginInit();
+            grpOther.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
@@ -1115,6 +1121,9 @@
             // 
             // grpDebug
             // 
+            grpDebug.Controls.Add(chkMouse5Status);
+            grpDebug.Controls.Add(chkShiftHold);
+            grpDebug.Controls.Add(chkSpaceStatus);
             grpDebug.Controls.Add(lblColorTolerance);
             grpDebug.Controls.Add(trkColorTolerance);
             grpDebug.Controls.Add(lblColorToleranceTitle);
@@ -1146,10 +1155,43 @@
             grpDebug.Controls.Add(chkDebugMode);
             grpDebug.Location = new System.Drawing.Point(309, 72);
             grpDebug.Name = "grpDebug";
-            grpDebug.Size = new System.Drawing.Size(436, 227);
+            grpDebug.Size = new System.Drawing.Size(597, 227);
             grpDebug.TabIndex = 51;
             grpDebug.TabStop = false;
             grpDebug.Text = "Debug";
+            // 
+            // chkMouse5Status
+            // 
+            chkMouse5Status.AutoSize = true;
+            chkMouse5Status.Enabled = false;
+            chkMouse5Status.Location = new System.Drawing.Point(448, 101);
+            chkMouse5Status.Name = "chkMouse5Status";
+            chkMouse5Status.Size = new System.Drawing.Size(105, 19);
+            chkMouse5Status.TabIndex = 49;
+            chkMouse5Status.Text = "Mouse 5 status";
+            chkMouse5Status.UseVisualStyleBackColor = true;
+            // 
+            // chkShiftHold
+            // 
+            chkShiftHold.AutoSize = true;
+            chkShiftHold.Enabled = false;
+            chkShiftHold.Location = new System.Drawing.Point(448, 76);
+            chkShiftHold.Name = "chkShiftHold";
+            chkShiftHold.Size = new System.Drawing.Size(84, 19);
+            chkShiftHold.TabIndex = 48;
+            chkShiftHold.Text = "Shift status";
+            chkShiftHold.UseVisualStyleBackColor = true;
+            // 
+            // chkSpaceStatus
+            // 
+            chkSpaceStatus.AutoSize = true;
+            chkSpaceStatus.Enabled = false;
+            chkSpaceStatus.Location = new System.Drawing.Point(448, 51);
+            chkSpaceStatus.Name = "chkSpaceStatus";
+            chkSpaceStatus.Size = new System.Drawing.Size(108, 19);
+            chkSpaceStatus.TabIndex = 47;
+            chkSpaceStatus.Text = "Spacebar status";
+            chkSpaceStatus.UseVisualStyleBackColor = true;
             // 
             // lblColorTolerance
             // 
@@ -1382,11 +1424,33 @@
             lblHideout1.TabIndex = 52;
             lblHideout1.Text = "ATTENTION: Load into hideout first, make sure life";
             // 
+            // chkSmartSprint
+            // 
+            chkSmartSprint.AutoSize = true;
+            chkSmartSprint.Location = new System.Drawing.Point(6, 26);
+            chkSmartSprint.Name = "chkSmartSprint";
+            chkSmartSprint.Size = new System.Drawing.Size(90, 19);
+            chkSmartSprint.TabIndex = 53;
+            chkSmartSprint.Text = "Smart sprint";
+            chkSmartSprint.UseVisualStyleBackColor = true;
+            chkSmartSprint.CheckedChanged += chkSmartSprint_CheckedChanged;
+            // 
+            // grpOther
+            // 
+            grpOther.Controls.Add(chkSmartSprint);
+            grpOther.Location = new System.Drawing.Point(751, 305);
+            grpOther.Name = "grpOther";
+            grpOther.Size = new System.Drawing.Size(155, 227);
+            grpOther.TabIndex = 54;
+            grpOther.TabStop = false;
+            grpOther.Text = "Others";
+            // 
             // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(762, 692);
+            ClientSize = new System.Drawing.Size(915, 692);
+            Controls.Add(grpOther);
             Controls.Add(lblHideout1);
             Controls.Add(btnLoadSettings);
             Controls.Add(grpDebug);
@@ -1427,6 +1491,8 @@
             grpDebug.ResumeLayout(false);
             grpDebug.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trkColorTolerance).EndInit();
+            grpOther.ResumeLayout(false);
+            grpOther.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1541,5 +1607,10 @@
         public System.Windows.Forms.Label lblColorTolerance;
         private System.Windows.Forms.TrackBar trkColorTolerance;
         public System.Windows.Forms.Label lblColorToleranceTitle;
+        public System.Windows.Forms.CheckBox chkSmartSprint;
+        private System.Windows.Forms.GroupBox grpOther;
+        public System.Windows.Forms.CheckBox chkMouse5Status;
+        public System.Windows.Forms.CheckBox chkShiftHold;
+        public System.Windows.Forms.CheckBox chkSpaceStatus;
     }
 }

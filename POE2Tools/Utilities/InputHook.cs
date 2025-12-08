@@ -173,6 +173,16 @@ namespace POE2Tools.Utilities
             }
         }
 
+        public void SendKeyDown(Keys key)
+        {
+            keybd_event((byte)key, 0, KEYEVENTF_KEYDOWN, UIntPtr.Zero);
+        }
+
+        public void SendKeyUp(Keys key)
+        {
+            keybd_event((byte)key, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
+        }
+
 
 
 

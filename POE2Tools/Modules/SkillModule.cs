@@ -215,6 +215,5 @@ namespace POE2Tools.Modules
                     break;
             }
         }
-
     }
 }
