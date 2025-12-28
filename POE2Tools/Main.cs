@@ -21,6 +21,7 @@ namespace POE2Tools
         private PlayerStatus _playerStatus;
         private SkillModule _skillModule;
         private SprintModule _sprintModule;
+        private HoltenModule _holtenModule;
 
         private bool _started = false;
         private bool _debug = true;
@@ -56,6 +57,7 @@ namespace POE2Tools
             _playerStatus = new PlayerStatus(this, _windowsUtil, _inputHook, _colorUtil);
             _skillModule = new SkillModule(this, _windowsUtil, _inputHook, _playerStatus);
             _sprintModule = new SprintModule(this, _windowsUtil, _inputHook, _playerStatus);
+            _holtenModule = new HoltenModule(this, _windowsUtil, _inputHook, _colorUtil);
 
             _inputHook.RegisterRawInputDevices(this.Handle, OnMouseKeyEvent, OnKeyEvent);
 
@@ -76,6 +78,7 @@ namespace POE2Tools
             _playerStatus.Start();
             _skillModule.Start();
             _sprintModule.Start();
+            _holtenModule.Start();
             _windowsUtil.SetStarted(true);
         }
 
@@ -85,6 +88,7 @@ namespace POE2Tools
             _playerStatus.Stop();
             _skillModule.Stop();
             _sprintModule.Stop();
+            _holtenModule.Stop();
             _windowsUtil.SetStarted(false);
         }
 
@@ -125,9 +129,17 @@ namespace POE2Tools
                 lblMessage.Text = "Toolbox is working...";
             }
 
+            if (_debug)
+            {
+                PointF mousePos = _inputHook.GetCurrentMousePosition();
+                lblMousePosX.Text = mousePos.X.ToString();
+                lblMousePosY.Text = mousePos.Y.ToString();
+            }
+
             _playerStatus.MainLoop(deltaTime, shouldDoLogic, _started);
             _skillModule.MainLoop(deltaTime, shouldDoLogic, _started);
             _sprintModule.MainLoop(deltaTime, shouldDoLogic, _started);
+            _holtenModule.MainLoop(deltaTime, shouldDoLogic, _started);
         }
 
         public bool IsDebugMode()
@@ -139,7 +151,11 @@ namespace POE2Tools
 
         private void OnKeyEvent(Keys key, bool isDown, bool isControlDown)
         {
-            if ((key == Keys.B) && !isDown && isControlDown)
+            if ((key == Keys.H) && !isDown && isControlDown)
+            {
+                chkHolten.Checked = !chkHolten.Checked;
+            }
+            else if ((key == Keys.B) && !isDown && isControlDown)
             {
                 _started = !_started;
                 if (_started)
@@ -169,7 +185,7 @@ namespace POE2Tools
             }
         }
 
-        private void lblSample_Click(object sender, EventArgs e)
+        private void btnSample_Click(object sender, EventArgs e)
         {
             _playerStatus.Sample();
         }
@@ -505,6 +521,12 @@ namespace POE2Tools
         private void btnLoadSettings_Click(object sender, EventArgs e)
         {
             LoadSettings();
+        }
+
+        private void chkHolten_CheckedChanged(object sender, EventArgs e)
+        {
+            _windowsUtil.SetHoltenMode(chkHolten.Checked);
+            _holtenModule.SetEnabled(chkHolten.Checked);
         }
     }
 }

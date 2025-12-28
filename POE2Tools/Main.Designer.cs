@@ -41,7 +41,7 @@
             lblUpdateRateTitle = new System.Windows.Forms.Label();
             trkUpdateRate = new System.Windows.Forms.TrackBar();
             lblUpdateRate = new System.Windows.Forms.Label();
-            lblSample = new System.Windows.Forms.Button();
+            btnSample = new System.Windows.Forms.Button();
             grpFlask1 = new System.Windows.Forms.GroupBox();
             chkFlaskHighMana1 = new System.Windows.Forms.CheckBox();
             lblFlaskCooldown1 = new System.Windows.Forms.Label();
@@ -113,6 +113,9 @@
             chkSkillCooldown5 = new System.Windows.Forms.CheckBox();
             chkSkillLowLife5 = new System.Windows.Forms.CheckBox();
             grpDebug = new System.Windows.Forms.GroupBox();
+            lblMousePosY = new System.Windows.Forms.Label();
+            lblMousePosX = new System.Windows.Forms.Label();
+            lblMousePosTitle = new System.Windows.Forms.Label();
             chkMouse5Status = new System.Windows.Forms.CheckBox();
             chkShiftHold = new System.Windows.Forms.CheckBox();
             chkSpaceStatus = new System.Windows.Forms.CheckBox();
@@ -142,6 +145,7 @@
             lblHideout1 = new System.Windows.Forms.Label();
             chkSmartSprint = new System.Windows.Forms.CheckBox();
             grpOther = new System.Windows.Forms.GroupBox();
+            chkHolten = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)trkUpdateRate).BeginInit();
             grpFlask1.SuspendLayout();
             grpFlask2.SuspendLayout();
@@ -296,16 +300,16 @@
             lblUpdateRate.TabIndex = 27;
             lblUpdateRate.Text = "40ms";
             // 
-            // lblSample
+            // btnSample
             // 
-            lblSample.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            lblSample.Location = new System.Drawing.Point(603, 601);
-            lblSample.Name = "lblSample";
-            lblSample.Size = new System.Drawing.Size(142, 33);
-            lblSample.TabIndex = 28;
-            lblSample.Text = "SAMPLE";
-            lblSample.UseVisualStyleBackColor = true;
-            lblSample.Click += lblSample_Click;
+            btnSample.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSample.Location = new System.Drawing.Point(603, 601);
+            btnSample.Name = "btnSample";
+            btnSample.Size = new System.Drawing.Size(142, 33);
+            btnSample.TabIndex = 28;
+            btnSample.Text = "SAMPLE";
+            btnSample.UseVisualStyleBackColor = true;
+            btnSample.Click += btnSample_Click;
             // 
             // grpFlask1
             // 
@@ -1121,6 +1125,9 @@
             // 
             // grpDebug
             // 
+            grpDebug.Controls.Add(lblMousePosY);
+            grpDebug.Controls.Add(lblMousePosX);
+            grpDebug.Controls.Add(lblMousePosTitle);
             grpDebug.Controls.Add(chkMouse5Status);
             grpDebug.Controls.Add(chkShiftHold);
             grpDebug.Controls.Add(chkSpaceStatus);
@@ -1159,6 +1166,39 @@
             grpDebug.TabIndex = 51;
             grpDebug.TabStop = false;
             grpDebug.Text = "Debug";
+            // 
+            // lblMousePosY
+            // 
+            lblMousePosY.AutoSize = true;
+            lblMousePosY.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblMousePosY.ForeColor = System.Drawing.Color.Black;
+            lblMousePosY.Location = new System.Drawing.Point(448, 201);
+            lblMousePosY.Name = "lblMousePosY";
+            lblMousePosY.Size = new System.Drawing.Size(22, 15);
+            lblMousePosY.TabIndex = 52;
+            lblMousePosY.Text = "0.5";
+            // 
+            // lblMousePosX
+            // 
+            lblMousePosX.AutoSize = true;
+            lblMousePosX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblMousePosX.ForeColor = System.Drawing.Color.Black;
+            lblMousePosX.Location = new System.Drawing.Point(448, 180);
+            lblMousePosX.Name = "lblMousePosX";
+            lblMousePosX.Size = new System.Drawing.Size(22, 15);
+            lblMousePosX.TabIndex = 51;
+            lblMousePosX.Text = "0.5";
+            // 
+            // lblMousePosTitle
+            // 
+            lblMousePosTitle.AutoSize = true;
+            lblMousePosTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblMousePosTitle.ForeColor = System.Drawing.Color.Black;
+            lblMousePosTitle.Location = new System.Drawing.Point(448, 155);
+            lblMousePosTitle.Name = "lblMousePosTitle";
+            lblMousePosTitle.Size = new System.Drawing.Size(92, 15);
+            lblMousePosTitle.TabIndex = 50;
+            lblMousePosTitle.Text = "Mouse position:";
             // 
             // chkMouse5Status
             // 
@@ -1437,6 +1477,7 @@
             // 
             // grpOther
             // 
+            grpOther.Controls.Add(chkHolten);
             grpOther.Controls.Add(chkSmartSprint);
             grpOther.Location = new System.Drawing.Point(751, 305);
             grpOther.Name = "grpOther";
@@ -1444,6 +1485,17 @@
             grpOther.TabIndex = 54;
             grpOther.TabStop = false;
             grpOther.Text = "Others";
+            // 
+            // chkHolten
+            // 
+            chkHolten.AutoSize = true;
+            chkHolten.Location = new System.Drawing.Point(6, 51);
+            chkHolten.Name = "chkHolten";
+            chkHolten.Size = new System.Drawing.Size(107, 19);
+            chkHolten.TabIndex = 54;
+            chkHolten.Text = "Holten (ctrl+H)";
+            chkHolten.UseVisualStyleBackColor = true;
+            chkHolten.CheckedChanged += chkHolten_CheckedChanged;
             // 
             // Main
             // 
@@ -1462,7 +1514,7 @@
             Controls.Add(grpSkill1);
             Controls.Add(grpFlask2);
             Controls.Add(grpFlask1);
-            Controls.Add(lblSample);
+            Controls.Add(btnSample);
             Controls.Add(lblSaveSettings);
             Controls.Add(btnStartStop);
             Controls.Add(lblHideout2);
@@ -1509,7 +1561,7 @@
         private System.Windows.Forms.TrackBar trkUpdateRate;
         public System.Windows.Forms.Label lblUpdateRateTitle;
         public System.Windows.Forms.Label lblUpdateRate;
-        public System.Windows.Forms.Button lblSample;
+        public System.Windows.Forms.Button btnSample;
         public System.Windows.Forms.Label lblDeltaTimeTitle;
         public System.Windows.Forms.Label lblDeltaTime;
         public System.Windows.Forms.GroupBox grpFlask1;
@@ -1612,5 +1664,9 @@
         public System.Windows.Forms.CheckBox chkMouse5Status;
         public System.Windows.Forms.CheckBox chkShiftHold;
         public System.Windows.Forms.CheckBox chkSpaceStatus;
+        public System.Windows.Forms.Label lblMousePosY;
+        public System.Windows.Forms.Label lblMousePosX;
+        public System.Windows.Forms.Label lblMousePosTitle;
+        public System.Windows.Forms.CheckBox chkHolten;
     }
 }

@@ -233,13 +233,15 @@ namespace POE2Tools.Utilities
         [DllImport("user32.dll")]
         static extern bool ShowCursor(bool bShow);
 
-        public Point GetCurrentMousePosition()
+        public PointF GetCurrentMousePosition()
         {
+            int screenWidth = GetSystemMetrics(0);
+            int screenHeight = GetSystemMetrics(1);
             GetCursorPos(out POINT originalPos);
-            Point result = new Point(originalPos.X, originalPos.Y);
+            PointF result = new PointF((float)originalPos.X / screenWidth, (float)originalPos.Y / screenHeight);
             return result;
         }
-        public void SendLeftClick()
+        public void SendLeftClick(bool control = false)
         {
             INPUT[] inputs = new INPUT[2];
 
@@ -251,7 +253,15 @@ namespace POE2Tools.Utilities
             inputs[1].type = INPUT_MOUSE;
             inputs[1].mi.dwFlags = MOUSEEVENTF_LEFTUP;
 
+            if (control && !_controlPressing)
+            {
+                keybd_event((byte)Keys.ControlKey, 0, KEYEVENTF_KEYDOWN, UIntPtr.Zero);
+            }
             SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
+            if (control && !_controlPressing)
+            {
+                keybd_event((byte)Keys.ControlKey, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
+            }
         }
 
         public void MoveMouse(int x, int y)

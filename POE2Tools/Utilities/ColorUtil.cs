@@ -46,6 +46,13 @@ namespace POE2Tools.Utilities
             return new Point((int)(screenWidth * xRatio), (int)(screenHeight * yRatio));
         }
 
+        public Point GetWindowsSize()
+        {
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+            return new Point(screenWidth, screenHeight);
+        }
+
         public Color GetColorAt(Point position)
         {
             IntPtr hdcDest = _graphics.GetHdc();

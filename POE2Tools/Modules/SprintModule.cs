@@ -108,7 +108,7 @@ namespace POE2Tools.Modules
             _shiftHolding = isDown;
             if (_responsiveDodge == true && isDown && !_forwardMouseHolding)
             {
-                if (_dodgeProcessStep == DODGE_PROCESS_IDLE)
+                if (_spaceBarHolding && _dodgeProcessStep == DODGE_PROCESS_IDLE)
                 {
                     _skipNextSpaceBar = true;
                     _inputHook.SendKeyDown(Keys.Space);
