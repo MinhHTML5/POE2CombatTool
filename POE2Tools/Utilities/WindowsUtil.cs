@@ -46,11 +46,7 @@ namespace POE2Tools.Utilities
             _overlayForm.SetStarted(start);
         }
 
-        public void SetHoltenMode(bool holten)
-        {
-            _overlayForm.SetHoltenMode(holten);
-        }
-
+        
 
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
@@ -94,7 +90,6 @@ namespace POE2Tools.Utilities
         public bool enableDebug = true;
         public bool enableDrawText = true;
         public bool started = false;
-        public bool holtenMode = false;
 
         private List<Point> drawPoints = new List<Point>();
 
@@ -136,12 +131,7 @@ namespace POE2Tools.Utilities
             Invalidate();
         }
 
-        public void SetHoltenMode(bool holten)
-        {
-            holtenMode = holten;
-            Invalidate();
-        }
-
+        
         public Point GetPixelPosition(float xRatio, float yRatio)
         {
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
@@ -173,30 +163,15 @@ namespace POE2Tools.Utilities
                         {
                             using (Brush brush = new SolidBrush(Color.LimeGreen))
                             {
-                                if (holtenMode)
-                                {
-                                    e.Graphics.DrawString("POE Toolbox ON - HOLTEN!!!", font, brush, _textPoint.X, _textPoint.Y);
-                                }
-                                else
-                                {
-                                    e.Graphics.DrawString("POE Toolbox ON", font, brush, _textPoint.X, _textPoint.Y);
-                                }
-                                    
+                                e.Graphics.DrawString("POE Toolbox ON", font, brush, _textPoint.X, _textPoint.Y);
+                                     
                             }
                         }
                         else
                         {
                             using (Brush brush = new SolidBrush(Color.Red))
                             {
-                                if (holtenMode)
-                                {
-                                    e.Graphics.DrawString("POE Toolbox OFF - HOLTEN!!!", font, brush, _textPoint.X, _textPoint.Y);
-                                }
-                                else
-                                {
-                                    e.Graphics.DrawString("POE Toolbox OFF", font, brush, _textPoint.X, _textPoint.Y);
-                                }
-                                    
+                                e.Graphics.DrawString("POE Toolbox OFF", font, brush, _textPoint.X, _textPoint.Y);
                             }
                         }
                     }

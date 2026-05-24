@@ -185,5 +185,8 @@
     <Setting Name="chkSmartSprint" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+	<Setting Name="chkSmartReload" Type="System.Boolean" Scope="User">
+		<Value Profile="(Default)">False</Value>
+	</Setting>
   </Settings>
 </SettingsFile>

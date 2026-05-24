@@ -21,7 +21,6 @@ namespace POE2Tools
         private PlayerStatus _playerStatus;
         private SkillModule _skillModule;
         private SprintModule _sprintModule;
-        private HoltenModule _holtenModule;
 
         private bool _started = false;
         private bool _debug = true;
@@ -57,7 +56,6 @@ namespace POE2Tools
             _playerStatus = new PlayerStatus(this, _windowsUtil, _inputHook, _colorUtil);
             _skillModule = new SkillModule(this, _windowsUtil, _inputHook, _playerStatus);
             _sprintModule = new SprintModule(this, _windowsUtil, _inputHook, _playerStatus);
-            _holtenModule = new HoltenModule(this, _windowsUtil, _inputHook, _colorUtil);
 
             _inputHook.RegisterRawInputDevices(this.Handle, OnMouseKeyEvent, OnKeyEvent);
 
@@ -78,7 +76,6 @@ namespace POE2Tools
             _playerStatus.Start();
             _skillModule.Start();
             _sprintModule.Start();
-            _holtenModule.Start();
             _windowsUtil.SetStarted(true);
         }
 
@@ -88,7 +85,6 @@ namespace POE2Tools
             _playerStatus.Stop();
             _skillModule.Stop();
             _sprintModule.Stop();
-            _holtenModule.Stop();
             _windowsUtil.SetStarted(false);
         }
 
@@ -139,7 +135,6 @@ namespace POE2Tools
             _playerStatus.MainLoop(deltaTime, shouldDoLogic, _started);
             _skillModule.MainLoop(deltaTime, shouldDoLogic, _started);
             _sprintModule.MainLoop(deltaTime, shouldDoLogic, _started);
-            _holtenModule.MainLoop(deltaTime, shouldDoLogic, _started);
         }
 
         public bool IsDebugMode()
@@ -151,11 +146,7 @@ namespace POE2Tools
 
         private void OnKeyEvent(Keys key, bool isDown, bool isControlDown)
         {
-            if ((key == Keys.H) && !isDown && isControlDown)
-            {
-                chkHolten.Checked = !chkHolten.Checked;
-            }
-            else if ((key == Keys.B) && !isDown && isControlDown)
+            if ((key == Keys.B) && !isDown && isControlDown)
             {
                 _started = !_started;
                 if (_started)
@@ -181,7 +172,7 @@ namespace POE2Tools
         {
             if (key == MouseButtons.XButton2)
             {
-                _sprintModule.MouseForwardEventDetected(isDown);
+
             }
         }
 
@@ -433,6 +424,7 @@ namespace POE2Tools
             Properties.Settings.Default.chkSkillCooldown5 = chkSkillCooldown5.Checked;
 
             Properties.Settings.Default.chkSmartSprint = chkSmartSprint.Checked;
+            Properties.Settings.Default.chkSmartReload = chkSmartReload.Checked;
 
             Properties.Settings.Default.Save();
         }
@@ -508,6 +500,7 @@ namespace POE2Tools
             chkSkillCooldown5.Checked = Properties.Settings.Default.chkSkillCooldown5;
 
             chkSmartSprint.Checked = Properties.Settings.Default.chkSmartSprint;
+            chkSmartReload.Checked = Properties.Settings.Default.chkSmartReload;
 
             UpdateRateChange();
         }
@@ -523,10 +516,9 @@ namespace POE2Tools
             LoadSettings();
         }
 
-        private void chkHolten_CheckedChanged(object sender, EventArgs e)
+        private void chkSmartReload_CheckedChanged(object sender, EventArgs e)
         {
-            _windowsUtil.SetHoltenMode(chkHolten.Checked);
-            _holtenModule.SetEnabled(chkHolten.Checked);
+            _sprintModule.SetAutoReload(chkSmartReload.Checked);
         }
     }
 }

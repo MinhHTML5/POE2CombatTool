@@ -58,8 +58,8 @@ namespace POE2Tools.Utilities
         // SHIELD =====================================================================
         private const float HIGH_SHIELD_PIXEL_RATIO_X = 0.105f;
         private const float HIGH_SHIELD_PIXEL_RATIO_Y = 0.845f;
-        private const float LOW_SHIELD_PIXEL_RATIO_X = 0.112f;
-        private const float LOW_SHIELD_PIXEL_RATIO_Y = 0.942f;
+        private const float LOW_SHIELD_PIXEL_RATIO_X = 0.086f;
+        private const float LOW_SHIELD_PIXEL_RATIO_Y = 0.984f;
 
         private Point _highShieldPoint = new Point();
         private Point _lowShieldPoint = new Point();

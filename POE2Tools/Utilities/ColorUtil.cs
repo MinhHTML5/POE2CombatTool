@@ -32,6 +32,7 @@ namespace POE2Tools.Utilities
 
         private readonly Bitmap _bitmap;
         private readonly Graphics _graphics;
+        private Size singlePixelSize = new Size(1, 1);
 
         public ColorUtil()
         {
@@ -55,13 +56,22 @@ namespace POE2Tools.Utilities
 
         public Color GetColorAt(Point position)
         {
+            /*
             IntPtr hdcDest = _graphics.GetHdc();
             IntPtr hdcSrc = GetWindowDC(IntPtr.Zero); // Get full desktop DC
             BitBlt(hdcDest, 0, 0, 1, 1, hdcSrc, position.X, position.Y, SRCCOPY);
             ReleaseDC(IntPtr.Zero, hdcSrc);
             _graphics.ReleaseHdc(hdcDest);
             _graphics.Flush();              // Ensure update if needed
-            Color temp = _bitmap.GetPixel(0, 0);
+            return _bitmap.GetPixel(0, 0);
+            */
+            _graphics.CopyFromScreen(
+                position.X,
+                position.Y,
+                0,
+                0,
+                singlePixelSize
+            );
             return _bitmap.GetPixel(0, 0);
         }
 

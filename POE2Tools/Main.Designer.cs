@@ -145,7 +145,7 @@
             lblHideout1 = new System.Windows.Forms.Label();
             chkSmartSprint = new System.Windows.Forms.CheckBox();
             grpOther = new System.Windows.Forms.GroupBox();
-            chkHolten = new System.Windows.Forms.CheckBox();
+            chkSmartReload = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)trkUpdateRate).BeginInit();
             grpFlask1.SuspendLayout();
             grpFlask2.SuspendLayout();
@@ -162,7 +162,7 @@
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F);
             lblTitle.Location = new System.Drawing.Point(15, 18);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new System.Drawing.Size(240, 37);
@@ -181,7 +181,7 @@
             // lblHideout2
             // 
             lblHideout2.AutoSize = true;
-            lblHideout2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblHideout2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblHideout2.ForeColor = System.Drawing.Color.Red;
             lblHideout2.Location = new System.Drawing.Point(252, 628);
             lblHideout2.Name = "lblHideout2";
@@ -192,7 +192,7 @@
             // lblDeltaTimeTitle
             // 
             lblDeltaTimeTitle.AutoSize = true;
-            lblDeltaTimeTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblDeltaTimeTitle.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblDeltaTimeTitle.ForeColor = System.Drawing.Color.Black;
             lblDeltaTimeTitle.Location = new System.Drawing.Point(223, 201);
             lblDeltaTimeTitle.Name = "lblDeltaTimeTitle";
@@ -203,7 +203,7 @@
             // lblDeltaTime
             // 
             lblDeltaTime.AutoSize = true;
-            lblDeltaTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblDeltaTime.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblDeltaTime.ForeColor = System.Drawing.Color.Black;
             lblDeltaTime.Location = new System.Drawing.Point(391, 201);
             lblDeltaTime.Name = "lblDeltaTime";
@@ -226,7 +226,7 @@
             // 
             // btnStartStop
             // 
-            btnStartStop.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnStartStop.Font = new System.Drawing.Font("Segoe UI", 12F);
             btnStartStop.Location = new System.Drawing.Point(603, 640);
             btnStartStop.Name = "btnStartStop";
             btnStartStop.Size = new System.Drawing.Size(142, 33);
@@ -238,7 +238,7 @@
             // lblSaveSettings
             // 
             lblSaveSettings.AutoSize = true;
-            lblSaveSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSaveSettings.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblSaveSettings.ForeColor = System.Drawing.Color.Black;
             lblSaveSettings.Location = new System.Drawing.Point(252, 649);
             lblSaveSettings.Name = "lblSaveSettings";
@@ -269,7 +269,7 @@
             // lblUpdateRateTitle
             // 
             lblUpdateRateTitle.AutoSize = true;
-            lblUpdateRateTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblUpdateRateTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblUpdateRateTitle.ForeColor = System.Drawing.Color.Black;
             lblUpdateRateTitle.Location = new System.Drawing.Point(223, 130);
             lblUpdateRateTitle.Name = "lblUpdateRateTitle";
@@ -292,7 +292,7 @@
             // lblUpdateRate
             // 
             lblUpdateRate.AutoSize = true;
-            lblUpdateRate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblUpdateRate.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblUpdateRate.ForeColor = System.Drawing.Color.Black;
             lblUpdateRate.Location = new System.Drawing.Point(391, 131);
             lblUpdateRate.Name = "lblUpdateRate";
@@ -302,7 +302,7 @@
             // 
             // btnSample
             // 
-            btnSample.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btnSample.Font = new System.Drawing.Font("Segoe UI", 12F);
             btnSample.Location = new System.Drawing.Point(603, 601);
             btnSample.Name = "btnSample";
             btnSample.Size = new System.Drawing.Size(142, 33);
@@ -343,7 +343,7 @@
             // lblFlaskCooldown1
             // 
             lblFlaskCooldown1.AutoSize = true;
-            lblFlaskCooldown1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblFlaskCooldown1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblFlaskCooldown1.ForeColor = System.Drawing.Color.Black;
             lblFlaskCooldown1.Location = new System.Drawing.Point(6, 25);
             lblFlaskCooldown1.Name = "lblFlaskCooldown1";
@@ -369,7 +369,7 @@
             chkFlaskLowShield1.Name = "chkFlaskLowShield1";
             chkFlaskLowShield1.Size = new System.Drawing.Size(121, 19);
             chkFlaskLowShield1.TabIndex = 9;
-            chkFlaskLowShield1.Text = "Use on 50% shield";
+            chkFlaskLowShield1.Text = "Use on 10% shield";
             chkFlaskLowShield1.UseVisualStyleBackColor = true;
             chkFlaskLowShield1.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -380,7 +380,7 @@
             chkFlaskHighShield1.Name = "chkFlaskHighShield1";
             chkFlaskHighShield1.Size = new System.Drawing.Size(121, 19);
             chkFlaskHighShield1.TabIndex = 8;
-            chkFlaskHighShield1.Text = "Use on 80% shield";
+            chkFlaskHighShield1.Text = "Use on 75% shield";
             chkFlaskHighShield1.UseVisualStyleBackColor = true;
             chkFlaskHighShield1.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -448,7 +448,7 @@
             // lblFlaskCooldown2
             // 
             lblFlaskCooldown2.AutoSize = true;
-            lblFlaskCooldown2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblFlaskCooldown2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblFlaskCooldown2.ForeColor = System.Drawing.Color.Black;
             lblFlaskCooldown2.Location = new System.Drawing.Point(6, 25);
             lblFlaskCooldown2.Name = "lblFlaskCooldown2";
@@ -485,7 +485,7 @@
             chkFlaskLowShield2.Name = "chkFlaskLowShield2";
             chkFlaskLowShield2.Size = new System.Drawing.Size(121, 19);
             chkFlaskLowShield2.TabIndex = 9;
-            chkFlaskLowShield2.Text = "Use on 50% shield";
+            chkFlaskLowShield2.Text = "Use on 10% shield";
             chkFlaskLowShield2.UseVisualStyleBackColor = true;
             chkFlaskLowShield2.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -496,7 +496,7 @@
             chkFlaskHighShield2.Name = "chkFlaskHighShield2";
             chkFlaskHighShield2.Size = new System.Drawing.Size(121, 19);
             chkFlaskHighShield2.TabIndex = 8;
-            chkFlaskHighShield2.Text = "Use on 80% shield";
+            chkFlaskHighShield2.Text = "Use on 75% shield";
             chkFlaskHighShield2.UseVisualStyleBackColor = true;
             chkFlaskHighShield2.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -564,7 +564,7 @@
             // lblSkillCooldown1
             // 
             lblSkillCooldown1.AutoSize = true;
-            lblSkillCooldown1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSkillCooldown1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblSkillCooldown1.ForeColor = System.Drawing.Color.Black;
             lblSkillCooldown1.Location = new System.Drawing.Point(6, 25);
             lblSkillCooldown1.Name = "lblSkillCooldown1";
@@ -601,7 +601,7 @@
             chkSkillLowShield1.Name = "chkSkillLowShield1";
             chkSkillLowShield1.Size = new System.Drawing.Size(121, 19);
             chkSkillLowShield1.TabIndex = 9;
-            chkSkillLowShield1.Text = "Use on 50% shield";
+            chkSkillLowShield1.Text = "Use on 10% shield";
             chkSkillLowShield1.UseVisualStyleBackColor = true;
             chkSkillLowShield1.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -612,7 +612,7 @@
             chkSkillHighShield1.Name = "chkSkillHighShield1";
             chkSkillHighShield1.Size = new System.Drawing.Size(121, 19);
             chkSkillHighShield1.TabIndex = 8;
-            chkSkillHighShield1.Text = "Use on 80% shield";
+            chkSkillHighShield1.Text = "Use on 75% shield";
             chkSkillHighShield1.UseVisualStyleBackColor = true;
             chkSkillHighShield1.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -680,7 +680,7 @@
             // lblSkillCooldown2
             // 
             lblSkillCooldown2.AutoSize = true;
-            lblSkillCooldown2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSkillCooldown2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblSkillCooldown2.ForeColor = System.Drawing.Color.Black;
             lblSkillCooldown2.Location = new System.Drawing.Point(6, 25);
             lblSkillCooldown2.Name = "lblSkillCooldown2";
@@ -717,7 +717,7 @@
             chkSkillLowShield2.Name = "chkSkillLowShield2";
             chkSkillLowShield2.Size = new System.Drawing.Size(121, 19);
             chkSkillLowShield2.TabIndex = 9;
-            chkSkillLowShield2.Text = "Use on 50% shield";
+            chkSkillLowShield2.Text = "Use on 10% shield";
             chkSkillLowShield2.UseVisualStyleBackColor = true;
             chkSkillLowShield2.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -728,7 +728,7 @@
             chkSkillHighShield2.Name = "chkSkillHighShield2";
             chkSkillHighShield2.Size = new System.Drawing.Size(121, 19);
             chkSkillHighShield2.TabIndex = 8;
-            chkSkillHighShield2.Text = "Use on 80% shield";
+            chkSkillHighShield2.Text = "Use on 75% shield";
             chkSkillHighShield2.UseVisualStyleBackColor = true;
             chkSkillHighShield2.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -796,7 +796,7 @@
             // lblSkillCooldown3
             // 
             lblSkillCooldown3.AutoSize = true;
-            lblSkillCooldown3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSkillCooldown3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblSkillCooldown3.ForeColor = System.Drawing.Color.Black;
             lblSkillCooldown3.Location = new System.Drawing.Point(6, 25);
             lblSkillCooldown3.Name = "lblSkillCooldown3";
@@ -833,7 +833,7 @@
             chkSkillLowShield3.Name = "chkSkillLowShield3";
             chkSkillLowShield3.Size = new System.Drawing.Size(121, 19);
             chkSkillLowShield3.TabIndex = 9;
-            chkSkillLowShield3.Text = "Use on 50% shield";
+            chkSkillLowShield3.Text = "Use on 10% shield";
             chkSkillLowShield3.UseVisualStyleBackColor = true;
             chkSkillLowShield3.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -844,7 +844,7 @@
             chkSkillHighShield3.Name = "chkSkillHighShield3";
             chkSkillHighShield3.Size = new System.Drawing.Size(121, 19);
             chkSkillHighShield3.TabIndex = 8;
-            chkSkillHighShield3.Text = "Use on 80% shield";
+            chkSkillHighShield3.Text = "Use on 75% shield";
             chkSkillHighShield3.UseVisualStyleBackColor = true;
             chkSkillHighShield3.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -912,7 +912,7 @@
             // lblSkillCooldown4
             // 
             lblSkillCooldown4.AutoSize = true;
-            lblSkillCooldown4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSkillCooldown4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblSkillCooldown4.ForeColor = System.Drawing.Color.Black;
             lblSkillCooldown4.Location = new System.Drawing.Point(6, 25);
             lblSkillCooldown4.Name = "lblSkillCooldown4";
@@ -949,7 +949,7 @@
             chkSkillLowShield4.Name = "chkSkillLowShield4";
             chkSkillLowShield4.Size = new System.Drawing.Size(121, 19);
             chkSkillLowShield4.TabIndex = 9;
-            chkSkillLowShield4.Text = "Use on 50% shield";
+            chkSkillLowShield4.Text = "Use on 10% shield";
             chkSkillLowShield4.UseVisualStyleBackColor = true;
             chkSkillLowShield4.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -960,7 +960,7 @@
             chkSkillHighShield4.Name = "chkSkillHighShield4";
             chkSkillHighShield4.Size = new System.Drawing.Size(121, 19);
             chkSkillHighShield4.TabIndex = 8;
-            chkSkillHighShield4.Text = "Use on 80% shield";
+            chkSkillHighShield4.Text = "Use on 75% shield";
             chkSkillHighShield4.UseVisualStyleBackColor = true;
             chkSkillHighShield4.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -1028,7 +1028,7 @@
             // lblSkillCooldown5
             // 
             lblSkillCooldown5.AutoSize = true;
-            lblSkillCooldown5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblSkillCooldown5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblSkillCooldown5.ForeColor = System.Drawing.Color.Black;
             lblSkillCooldown5.Location = new System.Drawing.Point(6, 25);
             lblSkillCooldown5.Name = "lblSkillCooldown5";
@@ -1065,7 +1065,7 @@
             chkSkillLowShield5.Name = "chkSkillLowShield5";
             chkSkillLowShield5.Size = new System.Drawing.Size(121, 19);
             chkSkillLowShield5.TabIndex = 9;
-            chkSkillLowShield5.Text = "Use on 50% shield";
+            chkSkillLowShield5.Text = "Use on 10% shield";
             chkSkillLowShield5.UseVisualStyleBackColor = true;
             chkSkillLowShield5.CheckedChanged += chkLowShield_CheckedChanged;
             // 
@@ -1076,7 +1076,7 @@
             chkSkillHighShield5.Name = "chkSkillHighShield5";
             chkSkillHighShield5.Size = new System.Drawing.Size(121, 19);
             chkSkillHighShield5.TabIndex = 8;
-            chkSkillHighShield5.Text = "Use on 80% shield";
+            chkSkillHighShield5.Text = "Use on 75% shield";
             chkSkillHighShield5.UseVisualStyleBackColor = true;
             chkSkillHighShield5.CheckedChanged += chkHighShield_CheckedChanged;
             // 
@@ -1170,7 +1170,7 @@
             // lblMousePosY
             // 
             lblMousePosY.AutoSize = true;
-            lblMousePosY.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblMousePosY.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblMousePosY.ForeColor = System.Drawing.Color.Black;
             lblMousePosY.Location = new System.Drawing.Point(448, 201);
             lblMousePosY.Name = "lblMousePosY";
@@ -1181,7 +1181,7 @@
             // lblMousePosX
             // 
             lblMousePosX.AutoSize = true;
-            lblMousePosX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblMousePosX.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblMousePosX.ForeColor = System.Drawing.Color.Black;
             lblMousePosX.Location = new System.Drawing.Point(448, 180);
             lblMousePosX.Name = "lblMousePosX";
@@ -1192,7 +1192,7 @@
             // lblMousePosTitle
             // 
             lblMousePosTitle.AutoSize = true;
-            lblMousePosTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblMousePosTitle.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblMousePosTitle.ForeColor = System.Drawing.Color.Black;
             lblMousePosTitle.Location = new System.Drawing.Point(448, 155);
             lblMousePosTitle.Name = "lblMousePosTitle";
@@ -1236,7 +1236,7 @@
             // lblColorTolerance
             // 
             lblColorTolerance.AutoSize = true;
-            lblColorTolerance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblColorTolerance.Font = new System.Drawing.Font("Segoe UI", 9F);
             lblColorTolerance.ForeColor = System.Drawing.Color.Black;
             lblColorTolerance.Location = new System.Drawing.Point(401, 52);
             lblColorTolerance.Name = "lblColorTolerance";
@@ -1259,7 +1259,7 @@
             // lblColorToleranceTitle
             // 
             lblColorToleranceTitle.AutoSize = true;
-            lblColorToleranceTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblColorToleranceTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblColorToleranceTitle.ForeColor = System.Drawing.Color.Black;
             lblColorToleranceTitle.Location = new System.Drawing.Point(223, 52);
             lblColorToleranceTitle.Name = "lblColorToleranceTitle";
@@ -1456,7 +1456,7 @@
             // lblHideout1
             // 
             lblHideout1.AutoSize = true;
-            lblHideout1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            lblHideout1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             lblHideout1.ForeColor = System.Drawing.Color.Red;
             lblHideout1.Location = new System.Drawing.Point(252, 610);
             lblHideout1.Name = "lblHideout1";
@@ -1477,7 +1477,7 @@
             // 
             // grpOther
             // 
-            grpOther.Controls.Add(chkHolten);
+            grpOther.Controls.Add(chkSmartReload);
             grpOther.Controls.Add(chkSmartSprint);
             grpOther.Location = new System.Drawing.Point(751, 305);
             grpOther.Name = "grpOther";
@@ -1486,16 +1486,16 @@
             grpOther.TabStop = false;
             grpOther.Text = "Others";
             // 
-            // chkHolten
+            // chkSmartReload
             // 
-            chkHolten.AutoSize = true;
-            chkHolten.Location = new System.Drawing.Point(6, 51);
-            chkHolten.Name = "chkHolten";
-            chkHolten.Size = new System.Drawing.Size(107, 19);
-            chkHolten.TabIndex = 54;
-            chkHolten.Text = "Holten (ctrl+H)";
-            chkHolten.UseVisualStyleBackColor = true;
-            chkHolten.CheckedChanged += chkHolten_CheckedChanged;
+            chkSmartReload.AutoSize = true;
+            chkSmartReload.Location = new System.Drawing.Point(6, 51);
+            chkSmartReload.Name = "chkSmartReload";
+            chkSmartReload.Size = new System.Drawing.Size(93, 19);
+            chkSmartReload.TabIndex = 54;
+            chkSmartReload.Text = "Smart reload";
+            chkSmartReload.UseVisualStyleBackColor = true;
+            chkSmartReload.CheckedChanged += chkSmartReload_CheckedChanged;
             // 
             // Main
             // 
@@ -1667,6 +1667,6 @@
         public System.Windows.Forms.Label lblMousePosY;
         public System.Windows.Forms.Label lblMousePosX;
         public System.Windows.Forms.Label lblMousePosTitle;
-        public System.Windows.Forms.CheckBox chkHolten;
+        public System.Windows.Forms.CheckBox chkSmartReload;
     }
 }

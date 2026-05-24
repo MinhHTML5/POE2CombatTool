@@ -14,7 +14,8 @@ namespace POE2Tools.Modules
         public const int DODGE_PROCESS_IDLE = 0;
         public const int DODGE_PROCESS_WAIT_RELEASE = 1;
 
-        public const float SPACEBAR_RELEASE_TIME = 300;
+        public const float SPACEBAR_RELEASE_TIME = 250;
+        public const float AUTO_RELOAD_TIME = 500;
 
         public Main _main;
         public WindowsUtil _windowsUtil;
@@ -24,10 +25,13 @@ namespace POE2Tools.Modules
         private bool _responsiveDodge = false;
         private int _dodgeProcessStep = DODGE_PROCESS_IDLE;
         private float _dodgeProcessCount = 0;
-        private bool _forwardMouseHolding = false;
         private bool _spaceBarHolding = false;
         private bool _shiftHolding = false;
         private bool _skipNextSpaceBar = false;
+
+
+        private bool _autoReload = false;
+        private float _autoReloadCount = 0;
 
         public SprintModule(Main main, WindowsUtil windowsUtil, InputHook inputHook, PlayerStatus playerStatus)
         {
@@ -73,11 +77,26 @@ namespace POE2Tools.Modules
                     }
                 }
             }
+
+            if (_autoReload && started && shouldDoLogic && _autoReloadCount < AUTO_RELOAD_TIME)
+            {
+                _autoReloadCount += deltaTime;
+                if (_autoReloadCount >= AUTO_RELOAD_TIME)
+                {
+                    _inputHook.SendKeyDown(Keys.F);
+                    _inputHook.SendKeyUp(Keys.F);
+                }
+            }
         }
 
         public void SetResponsiveDodge(bool value)
         {
             _responsiveDodge = value;
+        }
+
+        public void SetAutoReload(bool value)
+        {
+            _autoReload = value;
         }
 
         public void SpaceEventDetected(bool isDown)
@@ -89,12 +108,14 @@ namespace POE2Tools.Modules
             }
 
             _spaceBarHolding = isDown;
-            if (_responsiveDodge == true && isDown && !_forwardMouseHolding)
+            if (_responsiveDodge == true && isDown)
             {
                 if (_dodgeProcessStep == DODGE_PROCESS_IDLE)
                 {
                     _dodgeProcessCount = 0;
                     _dodgeProcessStep = DODGE_PROCESS_WAIT_RELEASE;
+
+                    _autoReloadCount = 0;
                 }
             }
             if (_main.IsDebugMode())
@@ -106,7 +127,7 @@ namespace POE2Tools.Modules
         public void ShiftEventDetected(bool isDown)
         {
             _shiftHolding = isDown;
-            if (_responsiveDodge == true && isDown && !_forwardMouseHolding)
+            if (_responsiveDodge == true && isDown)
             {
                 if (_spaceBarHolding && _dodgeProcessStep == DODGE_PROCESS_IDLE)
                 {
@@ -118,23 +139,6 @@ namespace POE2Tools.Modules
             if (_main.IsDebugMode())
             {
                 _main.chkShiftHold.Checked = isDown;
-            }
-        }
-
-        public void MouseForwardEventDetected(bool isDown)
-        {
-            _forwardMouseHolding = isDown;
-            if (isDown)
-            {
-                _inputHook.SendKeyDown(Keys.Space);
-            }
-            else
-            {
-                _inputHook.SendKeyUp(Keys.Space);
-            }
-            if (_main.IsDebugMode())
-            {
-                _main.chkMouse5Status.Checked = isDown;
             }
         }
     }
