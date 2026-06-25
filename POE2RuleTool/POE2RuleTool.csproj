@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\POE2Tools\Utilities\ColorUtil.cs" Link="Utilities\ColorUtil.cs" />
+    <Compile Include="..\POE2Tools\Utilities\InputHook.cs" Link="Utilities\InputHook.cs" />
+    <Compile Include="..\POE2Tools\Utilities\WindowsUtil.cs" Link="Utilities\WindowsUtil.cs" />
+  </ItemGroup>
+</Project>
