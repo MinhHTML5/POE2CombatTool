@@ -7,8 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POE2Tools.Modules;
-using static System.Windows.Forms.AxHost;
 
 namespace POE2Tools.Utilities
 {

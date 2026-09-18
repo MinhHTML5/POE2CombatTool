@@ -21,6 +21,7 @@ namespace POE2Tools
         private PlayerStatus _playerStatus;
         private SkillModule _skillModule;
         private SprintModule _sprintModule;
+        private ReloadModule _reloadModule;
 
         private bool _started = false;
         private bool _debug = true;
@@ -56,6 +57,7 @@ namespace POE2Tools
             _playerStatus = new PlayerStatus(this, _windowsUtil, _inputHook, _colorUtil);
             _skillModule = new SkillModule(this, _windowsUtil, _inputHook, _playerStatus);
             _sprintModule = new SprintModule(this, _windowsUtil, _inputHook, _playerStatus);
+            _reloadModule = new ReloadModule(this, _windowsUtil, _inputHook, _playerStatus);
 
             _inputHook.RegisterRawInputDevices(this.Handle, OnMouseKeyEvent, OnKeyEvent);
 
@@ -76,6 +78,7 @@ namespace POE2Tools
             _playerStatus.Start();
             _skillModule.Start();
             _sprintModule.Start();
+            _reloadModule.Start();
             _windowsUtil.SetStarted(true);
         }
 
@@ -85,6 +88,7 @@ namespace POE2Tools
             _playerStatus.Stop();
             _skillModule.Stop();
             _sprintModule.Stop();
+            _reloadModule.Stop();
             _windowsUtil.SetStarted(false);
         }
 
@@ -135,6 +139,7 @@ namespace POE2Tools
             _playerStatus.MainLoop(deltaTime, shouldDoLogic, _started);
             _skillModule.MainLoop(deltaTime, shouldDoLogic, _started);
             _sprintModule.MainLoop(deltaTime, shouldDoLogic, _started);
+            _reloadModule.MainLoop(deltaTime, shouldDoLogic, _started);
         }
 
         public bool IsDebugMode()
@@ -170,10 +175,21 @@ namespace POE2Tools
 
         private void OnMouseKeyEvent(MouseButtons key, bool isDown)
         {
+            if (key == MouseButtons.Left && !isDown)
+            {
+                _reloadModule.LeftClick();
+            }
+            else if (key == MouseButtons.Right && !isDown)
+            {
+                _reloadModule.RightClick();
+            }
+
+            /*
             if (key == MouseButtons.XButton2)
             {
 
             }
+            */
         }
 
         private void btnSample_Click(object sender, EventArgs e)
@@ -518,7 +534,7 @@ namespace POE2Tools
 
         private void chkSmartReload_CheckedChanged(object sender, EventArgs e)
         {
-            _sprintModule.SetAutoReload(chkSmartReload.Checked);
+            _reloadModule.SetAutoReload(chkSmartReload.Checked);
         }
     }
 }

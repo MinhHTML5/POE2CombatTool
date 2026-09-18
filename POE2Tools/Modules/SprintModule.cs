@@ -15,7 +15,6 @@ namespace POE2Tools.Modules
         public const int DODGE_PROCESS_WAIT_RELEASE = 1;
 
         public const float SPACEBAR_RELEASE_TIME = 250;
-        public const float AUTO_RELOAD_TIME = 500;
 
         public Main _main;
         public WindowsUtil _windowsUtil;
@@ -29,9 +28,6 @@ namespace POE2Tools.Modules
         private bool _shiftHolding = false;
         private bool _skipNextSpaceBar = false;
 
-
-        private bool _autoReload = false;
-        private float _autoReloadCount = 0;
 
         public SprintModule(Main main, WindowsUtil windowsUtil, InputHook inputHook, PlayerStatus playerStatus)
         {
@@ -77,16 +73,6 @@ namespace POE2Tools.Modules
                     }
                 }
             }
-
-            if (_autoReload && started && shouldDoLogic && _autoReloadCount < AUTO_RELOAD_TIME)
-            {
-                _autoReloadCount += deltaTime;
-                if (_autoReloadCount >= AUTO_RELOAD_TIME)
-                {
-                    _inputHook.SendKeyDown(Keys.F);
-                    _inputHook.SendKeyUp(Keys.F);
-                }
-            }
         }
 
         public void SetResponsiveDodge(bool value)
@@ -94,10 +80,7 @@ namespace POE2Tools.Modules
             _responsiveDodge = value;
         }
 
-        public void SetAutoReload(bool value)
-        {
-            _autoReload = value;
-        }
+        
 
         public void SpaceEventDetected(bool isDown)
         {
@@ -114,8 +97,6 @@ namespace POE2Tools.Modules
                 {
                     _dodgeProcessCount = 0;
                     _dodgeProcessStep = DODGE_PROCESS_WAIT_RELEASE;
-
-                    _autoReloadCount = 0;
                 }
             }
             if (_main.IsDebugMode())
