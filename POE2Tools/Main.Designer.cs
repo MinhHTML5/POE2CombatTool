@@ -146,6 +146,7 @@
             chkSmartSprint = new System.Windows.Forms.CheckBox();
             grpOther = new System.Windows.Forms.GroupBox();
             chkSmartReload = new System.Windows.Forms.CheckBox();
+            btnAutomation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)trkUpdateRate).BeginInit();
             grpFlask1.SuspendLayout();
             grpFlask2.SuspendLayout();
@@ -1497,11 +1498,22 @@
             chkSmartReload.UseVisualStyleBackColor = true;
             chkSmartReload.CheckedChanged += chkSmartReload_CheckedChanged;
             // 
+            // btnAutomation
+            // 
+            btnAutomation.Location = new System.Drawing.Point(751, 640);
+            btnAutomation.Name = "btnAutomation";
+            btnAutomation.Size = new System.Drawing.Size(155, 33);
+            btnAutomation.TabIndex = 55;
+            btnAutomation.Text = "Setup automation";
+            btnAutomation.UseVisualStyleBackColor = true;
+            btnAutomation.Click += btnAutomation_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(915, 692);
+            Controls.Add(btnAutomation);
             Controls.Add(grpOther);
             Controls.Add(lblHideout1);
             Controls.Add(btnLoadSettings);
@@ -1668,5 +1680,6 @@
         public System.Windows.Forms.Label lblMousePosX;
         public System.Windows.Forms.Label lblMousePosTitle;
         public System.Windows.Forms.CheckBox chkSmartReload;
+        public System.Windows.Forms.Button btnAutomation;
     }
 }

@@ -44,6 +44,11 @@ namespace POE2Tools.Utilities
             _overlayForm.SetStarted(start);
         }
 
+        public void SetAutomationMode(bool enabled)
+        {
+            _overlayForm.SetAutomationMode(enabled);
+        }
+
         
 
         [DllImport("user32.dll")]
@@ -88,6 +93,7 @@ namespace POE2Tools.Utilities
         public bool enableDebug = true;
         public bool enableDrawText = true;
         public bool started = false;
+        public bool automationMode = false;
 
         private List<Point> drawPoints = new List<Point>();
 
@@ -129,7 +135,13 @@ namespace POE2Tools.Utilities
             Invalidate();
         }
 
-        
+        public void SetAutomationMode(bool enabled)
+        {
+            automationMode = enabled;
+            Invalidate();
+        }
+
+
         public Point GetPixelPosition(float xRatio, float yRatio)
         {
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
@@ -161,8 +173,8 @@ namespace POE2Tools.Utilities
                         {
                             using (Brush brush = new SolidBrush(Color.LimeGreen))
                             {
-                                e.Graphics.DrawString("POE Toolbox ON", font, brush, _textPoint.X, _textPoint.Y);
-                                     
+                                string text = automationMode ? "POE Toolbox ON - Automation mode" : "POE Toolbox ON";
+                                e.Graphics.DrawString(text, font, brush, _textPoint.X, _textPoint.Y);
                             }
                         }
                         else

@@ -22,6 +22,8 @@ namespace POE2Tools
         private SkillModule _skillModule;
         private SprintModule _sprintModule;
         private ReloadModule _reloadModule;
+        private AutomationModule _automationModule;
+        private AutomationForm _automationForm;
 
         private bool _started = false;
         private bool _debug = true;
@@ -58,6 +60,7 @@ namespace POE2Tools
             _skillModule = new SkillModule(this, _windowsUtil, _inputHook, _playerStatus);
             _sprintModule = new SprintModule(this, _windowsUtil, _inputHook, _playerStatus);
             _reloadModule = new ReloadModule(this, _windowsUtil, _inputHook, _playerStatus);
+            _automationModule = new AutomationModule(this, _windowsUtil, _inputHook);
 
             _inputHook.RegisterRawInputDevices(this.Handle, OnMouseKeyEvent, OnKeyEvent);
 
@@ -79,6 +82,7 @@ namespace POE2Tools
             _skillModule.Start();
             _sprintModule.Start();
             _reloadModule.Start();
+            _automationModule.Start();
             _windowsUtil.SetStarted(true);
         }
 
@@ -89,6 +93,7 @@ namespace POE2Tools
             _skillModule.Stop();
             _sprintModule.Stop();
             _reloadModule.Stop();
+            _automationModule.Stop();
             _windowsUtil.SetStarted(false);
         }
 
@@ -101,10 +106,12 @@ namespace POE2Tools
             _stopwatch.Restart();
 
             // Check for game focus
-            if (_windowsUtil.GetCurrentWindowsProcessName() != "PathOfExile" && _started)
+            string currentProcessName = _windowsUtil.GetCurrentWindowsProcessName();
+            bool inFocus = currentProcessName == "PathOfExile";
+            if (!inFocus && _started)
             {
                 shouldDoLogic = false;
-                lblMessage.Text = "POE is out of focus. Current window: " + _windowsUtil.GetCurrentWindowsProcessName();
+                lblMessage.Text = "POE is out of focus. Current window: " + currentProcessName;
             }
 
             // Check for loading screen
@@ -126,7 +133,7 @@ namespace POE2Tools
             }
             else if (shouldDoLogic)
             {
-                lblMessage.Text = "Toolbox is working...";
+                lblMessage.Text = _automationModule.IsPlaying ? "Toolbox is working... (Automation mode)" : "Toolbox is working...";
             }
 
             if (_debug)
@@ -140,6 +147,8 @@ namespace POE2Tools
             _skillModule.MainLoop(deltaTime, shouldDoLogic, _started);
             _sprintModule.MainLoop(deltaTime, shouldDoLogic, _started);
             _reloadModule.MainLoop(deltaTime, shouldDoLogic, _started);
+            // Automation keeps playing through loading screens, it only cares about the game focus
+            _automationModule.MainLoop(deltaTime, inFocus, _started);
         }
 
         public bool IsDebugMode()
@@ -151,6 +160,8 @@ namespace POE2Tools
 
         private void OnKeyEvent(Keys key, bool isDown, bool isControlDown)
         {
+            _automationModule.OnKeyEvent(key, isDown, isControlDown);
+
             if ((key == Keys.B) && !isDown && isControlDown)
             {
                 _started = !_started;
@@ -175,6 +186,8 @@ namespace POE2Tools
 
         private void OnMouseKeyEvent(MouseButtons key, bool isDown)
         {
+            _automationModule.OnMouseEvent(key, isDown);
+
             if (key == MouseButtons.Left && !isDown)
             {
                 _reloadModule.LeftClick();
@@ -535,6 +548,19 @@ namespace POE2Tools
         private void chkSmartReload_CheckedChanged(object sender, EventArgs e)
         {
             _reloadModule.SetAutoReload(chkSmartReload.Checked);
+        }
+
+        private void btnAutomation_Click(object sender, EventArgs e)
+        {
+            if (_automationForm != null && !_automationForm.IsDisposed)
+            {
+                _automationForm.Activate();
+                return;
+            }
+
+            _automationForm = new AutomationForm(_automationModule);
+            _automationForm.FormClosed += (s, args) => _automationForm = null;
+            _automationForm.Show(this);
         }
     }
 }
