@@ -9,10 +9,9 @@ using System.Windows.Forms;
 namespace POE2Tools.Modules
 {
     // Records the user's mouse clicks / key presses into a macro, and plays it back on a loop.
-    // Hotkeys (only while the toolbox is started and the Automation window has an active preset):
-    //   Ctrl + Up:   start / stop recording
-    //   Ctrl + Down: start / stop the action preset from its first step,
-    //                or the macro preset if there is no action preset (or it has no step)
+    // Hotkeys (only while the toolbox is started and the Automation window is opened):
+    //   Ctrl + Up:   start / stop recording into the macro selected on the canvas
+    //   Ctrl + Down: start / stop the action preset from its Start node
     //   Ctrl + Right: take a screenshot, only while the capture window is opened
     public class AutomationModule
     {
@@ -60,7 +59,8 @@ namespace POE2Tools.Modules
         private volatile int _currentStep = 0;
         private volatile int _currentActionIndex = -1;
         private volatile int _finalStepCount = 0;
-        private volatile int _stopAfterFinalSteps = 0;
+        // Counted down by the playback thread every time the final step is completed
+        private int _stopAfterFinalSteps = 0;
         // The action ended by itself: "Stop after" was reached, or a condition ended it. Not set when stopped by the user
         private volatile bool _finishedByItself = false;
         private volatile string _lastCheckInfo = "";
@@ -90,11 +90,12 @@ namespace POE2Tools.Modules
         public int FinalStepCount => _finalStepCount;
         // Put the computer to sleep when the action ends by itself (StopAfterFinalSteps, or a condition that ends the action)
         public bool SleepWhenDone { get; set; } = false;
-        // The action stops by itself once its final step was completed this many times. 0 to never stop
+        // The action stops by itself once its final step was completed this many more times. 0 to never stop.
+        // It goes down by one every time the final step is completed
         public int StopAfterFinalSteps
         {
-            get { return _stopAfterFinalSteps; }
-            set { _stopAfterFinalSteps = Math.Max(0, value); }
+            get { return Volatile.Read(ref _stopAfterFinalSteps); }
+            set { Interlocked.Exchange(ref _stopAfterFinalSteps, Math.Max(0, value)); }
         }
         public int CurrentStep => _currentStep;
         // Index of the last action played in the macro of the current step, -1 if none yet
@@ -103,6 +104,9 @@ namespace POE2Tools.Modules
         public List<MacroAction> Actions => _actions;
         public int Duration => _duration;
         public string LastMessage { get; private set; } = "";
+
+        // Used by the playback thread only, to pick one of the targets of a check
+        private static readonly Random _random = new Random();
 
         [DllImport("winmm.dll")]
         private static extern uint timeBeginPeriod(uint uPeriod);
@@ -200,6 +204,8 @@ namespace POE2Tools.Modules
             // An action can't happen before the previous one
             int previousTime = index > 0 ? _actions[index - 1].Time : 0;
             newTime = Math.Max(previousTime, Math.Min(newTime, MAX_ACTION_TIME));
+            // A first mouse down needs the time of the mouse move that goes before it
+            if (index == 0 && _actions[0].Type == MacroActionType.MouseDown) newTime = Math.Max(newTime, MOUSE_MOVE_LEAD_TIME);
             int shift = newTime - _actions[index].Time;
             if (shift == 0) return false;
 
@@ -208,6 +214,20 @@ namespace POE2Tools.Modules
                 _actions[i].Time += shift;
             }
             _duration += shift;
+            MacroChanged?.Invoke();
+            return true;
+        }
+
+        // Manually change when the macro ends, after its last action. Returns false if nothing was changed.
+        public bool SetDuration(int newDuration)
+        {
+            if (_recording || IsPlaying) return false;
+
+            int lastTime = _actions.Count > 0 ? _actions[_actions.Count - 1].Time : 0;
+            newDuration = Math.Max(lastTime, Math.Min(newDuration, MAX_ACTION_TIME));
+            if (newDuration == _duration) return false;
+
+            _duration = newDuration;
             MacroChanged?.Invoke();
             return true;
         }
@@ -559,7 +579,7 @@ namespace POE2Tools.Modules
                 bool limitReached = false;
                 while (stepIndex >= 0 && stepIndex < steps.Count && !_playStopRequested)
                 {
-                    bool isFinalStep = stepIndex == steps.Count - 1;
+                    bool isFinalStep = steps[stepIndex].IsFinal;
                     _currentActionIndex = -1;
                     _currentStep = stepIndex;
                     _loopCount = 1;
@@ -571,9 +591,9 @@ namespace POE2Tools.Modules
                     {
                         _finalStepCount++;
                         // Read every time, the limit can be changed while the action is running
-                        int limit = _stopAfterFinalSteps;
-                        if (limit > 0 && _finalStepCount >= limit)
+                        if (StopAfterFinalSteps > 0 && Interlocked.Decrement(ref _stopAfterFinalSteps) <= 0)
                         {
+                            Interlocked.Exchange(ref _stopAfterFinalSteps, 0);
                             limitReached = true;
                             break;
                         }
@@ -666,7 +686,7 @@ namespace POE2Tools.Modules
                 loopsDone++;
                 foreach (AutomationEndCheck check in step.EndChecks)
                 {
-                    if (loopsDone >= check.Loops && stepWatch.ElapsedMilliseconds >= check.Milliseconds) return check.Target;
+                    if (loopsDone >= check.Loops && stepWatch.ElapsedMilliseconds >= check.Milliseconds) return PickTarget(check.Targets);
                 }
                 _loopCount++;
             }
@@ -715,6 +735,13 @@ namespace POE2Tools.Modules
             return AutomationStep.NO_JUMP;
         }
 
+        // A check with several targets (macros sharing a name) goes to one of them at random
+        private static int PickTarget(int[] targets)
+        {
+            if (targets == null || targets.Length == 0) return AutomationStep.TARGET_END;
+            return targets.Length == 1 ? targets[0] : targets[_random.Next(targets.Length)];
+        }
+
         // Same as WaitUntil, for a number of milliseconds from now
         private int WaitFor(int milliseconds, Stopwatch loopWatch, AutomationStep step, Stopwatch stepWatch)
         {
@@ -736,7 +763,7 @@ namespace POE2Tools.Modules
                     double percent = check.Matcher.GetMatchPercent(check.Tolerance);
                     check.NextCheckTime = stepWatch.ElapsedMilliseconds + check.Interval;
                     _lastCheckInfo = "Last screen check: " + percent.ToString("0.0") + "% (needs " + check.MatchPercent + "%)";
-                    if (percent >= check.MatchPercent) return check.Target;
+                    if (percent >= check.MatchPercent) return PickTarget(check.Targets);
                 }
 
                 if (loopWatch.ElapsedMilliseconds >= time) return AutomationStep.NO_JUMP;
@@ -752,6 +779,8 @@ namespace POE2Tools.Modules
         public const int NO_JUMP = -2;
 
         public string Name = "";
+        // Counts for StopAfterFinalSteps every time it is completed
+        public bool IsFinal = false;
         public List<MacroAction> Actions = new List<MacroAction>();
         public int Duration = 0;
         // Set for an "Item pickup" macro, which has no action. The scanner is made by the playback thread
@@ -762,12 +791,13 @@ namespace POE2Tools.Modules
         public List<AutomationScreenCheck> Checks = new List<AutomationScreenCheck>();
     }
 
-    // Met when the macro has looped at least that many times, and the step has been running for at least that long
+    // Met when the macro has looped at least that many times, and the step has been running for at least that long.
+    // Targets are step indexes (or AutomationStep.TARGET_END), one of them is picked at random when there are several
     public class AutomationEndCheck
     {
         public int Loops;
         public long Milliseconds;
-        public int Target;
+        public int[] Targets;
     }
 
     public class AutomationScreenCheck
@@ -776,7 +806,7 @@ namespace POE2Tools.Modules
         public int Interval;
         public int Tolerance;
         public int MatchPercent;
-        public int Target;
+        public int[] Targets;
         public long NextCheckTime;
     }
 }
